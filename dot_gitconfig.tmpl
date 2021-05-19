@@ -1,0 +1,25 @@
+[user]
+	name = "{{ .name }}"
+	email = "{{ .email }}"
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+	la = log --date-order --graph --format=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n					%s %Cgreen(%cr)' --abbrev-commit --date=relative --all
+	lb = log --date-order --graph --format=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n					%s %Cgreen(%cr)' --abbrev-commit --date=relative --branches
+	lg = log --date-order --graph --format=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n					%s %Cgreen(%cr)' --abbrev-commit --date=relative
+	ls = ls-files
+[merge]
+	tool = vimdiff3
+[mergetool]
+	path = nvim
+[credential]
+	helper = cache --timeout=86400
+[push]
+	default = tracking
+[core]
+	excludesfile = ~/.gitignore
+[pager]
+	diff = diff-so-fancy | less -RFX
+	show = diff-so-fancy | less -RFX

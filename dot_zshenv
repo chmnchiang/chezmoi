@@ -1,0 +1,47 @@
+# LC_COLLATE set to C to make ls sort by alphanumeric
+export LANG=en_US.UTF-8
+export LC_COLLATE=C
+
+export KEYTIMEOUT=1
+
+export EDITOR=vim
+if (( $+commands[nvim] )) ; then
+  export EDITOR=nvim
+fi
+
+# less
+export LESS='-RfFXi -P ?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]'
+export LESSCHARSET='utf-8'
+
+#############################
+# Path
+#############################
+typeset -U path PATH
+
+# local bin
+path=(~/.local/bin $path)
+
+# Ruby
+if (( $+commands[ruby] )) ; then
+  # According to https://wiki.archlinux.org/index.php/Ruby#RubyGems
+  export GEM_HOME=$(ruby -e 'puts Gem.user_dir')
+  path=($GEM_HOME/bin $path)
+fi
+
+# Node
+if (( $+commands[npm] )) ; then
+  path=(~/.node_modules/bin $path)
+  export npm_config_prefix=~/.node_modules
+fi
+
+# Cargo
+if (( $+commands[cargo] )) ; then
+  path=(~/.cargo/bin $path)
+fi
+
+# For cuda
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/cuda/lib64/
+
+if [[ -f "${HOME}/.zshenv.local" ]]; then
+  source "${HOME}/.zshenv.local"
+fi
