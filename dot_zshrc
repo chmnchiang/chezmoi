@@ -127,6 +127,12 @@ key[Shift-Tab]="${terminfo[kcbt]}"
 [[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"   end-of-buffer-or-history
 [[ -n "${key[Shift-Tab]}" ]] && bindkey -- "${key[Shift-Tab]}"  reverse-menu-complete
 
+bindkey -v '^?' backward-delete-char
+bindkey -v '^u' backward-kill-line
+bindkey -v '^w' backward-kill-word
+bindkey -v '^[f' forward-word
+bindkey -v '^[b' backward-word
+
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
 if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
@@ -166,9 +172,13 @@ alias sudoe='sudoedit'
 alias v='cat'
 if (( $+commands[bat] )) ; then
   alias v='bat'
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+elif (( $+commands[batcat] )) ; then
+  alias v='batcat'
+  export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
 fi
 
-alias p='pacaur'
+alias p='pikaur'
 
 #############################
 # Completions
