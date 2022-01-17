@@ -77,15 +77,19 @@ zplug load
 #############################
 # Options
 #############################
-# don't record duplicate history
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
 setopt hist_ignore_dups
-
+setopt hist_ignore_space
+setopt extended_history
+# share history between sessions
+setopt share_history
 # no flow control
 setopt noflowcontrol
-
 # rm confirmation
 setopt rm_star_wait
-
 # Directory Stack settings
 DIRSTACKSIZE=8
 # make cd = pushd
@@ -143,6 +147,9 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
+# Let ctrl-W not deleting over slash
+WORDCHARS=${WORDCHARS/\/}
+
 #############################
 # Aliases
 #############################
@@ -165,6 +172,7 @@ alias dirs='dirs -v'
 
 # set Tmux default 256 color
 alias tmux='tmux -2'
+alias t='tmux -2'
 
 alias e="${EDITOR}"
 alias sudoe='sudoedit'
