@@ -1,6 +1,3 @@
-[user]
-	name = "{{ .name }}"
-	email = "{{ .email }}"
 [alias]
 	st = status
 	ci = commit
@@ -23,3 +20,7 @@
 [pager]
 	diff = diff-so-fancy | less -RFX
 	show = diff-so-fancy | less -RFX
+[init]
+	defaultBranch = main
+[safe]
+	directory = /opt/flutter

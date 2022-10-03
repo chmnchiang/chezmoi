@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Borrow from https://github.com/leomao/dotfiles/blob/chezmoi/dot_zshrc
 
 #############################
@@ -47,7 +54,8 @@ zstyle :zplug:tag depth 1
 source "${HOME}/.zplug/init.zsh"
 
 zplug "mafredri/zsh-async"
-zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+zplug romkatv/powerlevel10k, as:theme, depth:1
+#zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 
 if [[ -f /etc/arch-release ]]; then
   if [[ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]]; then
@@ -154,6 +162,7 @@ WORDCHARS=${WORDCHARS/\/}
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^Xe" edit-command-line
+bindkey -a "^Xe" edit-command-line
 
 #############################
 # Aliases
@@ -253,3 +262,6 @@ fi
 if [[ -f "${HOME}/.zshrc.local" ]]; then
     source "${HOME}/.zshrc.local"
 fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
