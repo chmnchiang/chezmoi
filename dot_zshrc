@@ -195,6 +195,7 @@ alias v='cat'
 if (( $+commands[bat] )) ; then
   alias v='bat'
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  export MANROFFOPT='-c'
 elif (( $+commands[batcat] )) ; then
   alias v='batcat'
   export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
