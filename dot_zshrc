@@ -47,11 +47,14 @@ elif (( $+commands[ag] )); then
   export FZF_DEFAULT_COMMAND='ag -l -g ""'
 fi
 
-if ! [[ -f "${HOME}/.zplug/init.zsh" ]]; then
-  curl -sL zplug.sh/installer | zsh
+if ! [[ -f "/usr/share/zsh/scripts/zplug/init.zsh" ]]; then
+  echo "Please install zplug from AUR"
+  echo "For custom installation, please change the source path below"
+  read unused
+  exit 1
 fi
 zstyle :zplug:tag depth 1
-source "${HOME}/.zplug/init.zsh"
+source /usr/share/zsh/scripts/zplug/init.zsh
 
 zplug "mafredri/zsh-async"
 zplug romkatv/powerlevel10k, as:theme, depth:1
